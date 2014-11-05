@@ -106,6 +106,14 @@
     }
 }
 
+- (IBAction)toggleLove:(id)sender {
+    
+}
+
+- (IBAction)toggleHate:(id)sender {
+    
+}
+
 #pragma mark - Cleanup
 -(void)dealloc
 {
