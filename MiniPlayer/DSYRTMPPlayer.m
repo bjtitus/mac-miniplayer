@@ -7,6 +7,7 @@
 //
 
 #import "DSYRTMPPlayer.h"
+#import "DSYRTMPObject.h"
 
 @interface DSYRTMPPlayer ()
 {
@@ -19,7 +20,8 @@
     
     // Playback params
     BOOL isPaused;
-    NSTimer *playTimer;
+    
+    VLCMediaPlayer *player;
 }
 
 @end
@@ -179,6 +181,7 @@ void StreamPacketsProc(void                             *inClientData,
 
 -(void)playTrack:(DSYTrack *)track
 {
+    [player stop];
     // Cache track
     _track = track;
     
@@ -190,6 +193,8 @@ void StreamPacketsProc(void                             *inClientData,
     
     // Get the stream info for the track
     [track getRTMPStreamWithCompletion:^(DSYRTMPObject *rtmpStreamInfo, NSError *error) {
+        [self _setupAudioEngine];
+        
         if( error )
         {
             NSLog(@"API error fetching track, refresh token");
@@ -199,9 +204,52 @@ void StreamPacketsProc(void                             *inClientData,
             
             // Perform playback with this RTMP stream's info
             NSLog(@"Perform playback for track with info: %@",rtmpStreamInfo);
-        
+            
+            NSString *videoPath = [NSString stringWithFormat:@"%@/?slist=%@", rtmpStreamInfo.location, rtmpStreamInfo.resource];
+            NSLog(@"VIDEO PATH: %@", videoPath);
+            if (!player) {
+                player = [[VLCMediaPlayer alloc] init];
+                [player setDelegate:self];
+            }
+            [player setMedia:[VLCMedia mediaWithURL:[NSURL URLWithString:videoPath]]];
+            [player play];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationDidStartPlayback
+                                                                object:self];
         }
     }];
+}
+
+- (void)mediaPlayerStateChanged:(NSNotification *)aNotification {
+    switch (player.state) {
+        case VLCMediaPlayerStatePlaying:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationDidStartPlayback
+                                                                object:self];
+            break;
+            
+        case VLCMediaPlayerStateStopped:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationDidStopPlayback
+                                                                object:self];
+            break;
+            
+        case VLCMediaPlayerStatePaused:
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationDidStopPlayback
+                                                                object:self];
+            break;
+            
+        case VLCMediaPlayerStateEnded:
+            [self _tryPlayingNextSongInQueue];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationReachedEndOfFile
+                                                                object:self];
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)mediaPlayerTimeChanged:(NSNotification *)aNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationUpdatedPosition
+                                                        object:self];
 }
 
 #pragma mark - Setup
@@ -222,48 +270,6 @@ void StreamPacketsProc(void                             *inClientData,
                operation:"AudioFileStreamOpen failed to open stream"];
 }
 
-#pragma mark - Play Timer
--(void)_resetPlayTimer
-{
-    // Stop
-    if( playTimer )
-    {
-        [playTimer invalidate];
-        playTimer = nil;
-    }
-    
-    // Start
-    playTimer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                 target:self
-                                               selector:@selector(_sendPlayPositionNotification)
-                                               userInfo:nil
-                                                repeats:YES];
-}
-                 
--(void)_sendPlayPositionNotification
- {
-     // Check if the song has finished
-     if( [self _hasFinished] )
-     {
-         // Invalidate timer
-         [playTimer invalidate];
-         playTimer = nil;
-         
-         // EOF
-         [self _tryPlayingNextSongInQueue];
-         
-         // Send the EOF notification
-         [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationReachedEndOfFile
-                                                             object:self];
-     }
-     else
-     {
-         // Send the updated position notification
-         [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationUpdatedPosition
-                                                             object:self];
-     }
- }
-
 -(void)_tryPlayingNextSongInQueue
 {
     // See if there is a next track to get
@@ -283,30 +289,34 @@ void StreamPacketsProc(void                             *inClientData,
 #pragma mark - Play Events
 -(void)pause
 {
-    if( audioQueue )
-    {
-        // Pause queue
-        [self checkResult:AudioQueuePause(audioQueue)
-                   operation:"Failed to pause audio queue"];
-        
-        // Set
-        isPaused = YES;
-        
-        // Notify
-        // Notify
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationDidStopPlayback
-                                                                object:self];
-        });
-    }
+    [player pause];
+    
+//    if( audioQueue )
+//    {
+//        // Pause queue
+//        [self checkResult:AudioQueuePause(audioQueue)
+//                   operation:"Failed to pause audio queue"];
+//        
+//        // Set
+//        isPaused = YES;
+//        
+//        // Notify
+//        // Notify
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationDidStopPlayback
+//                                                                object:self];
+//        });
+//    }
 }
 
 -(void)resume
 {
-    if( audioQueue )
-    {
-        [self startQueue];
-    }
+    [player play];
+    
+//    if( audioQueue )
+//    {
+//        [self startQueue];
+//    }
 }
 
 // Start the audio queue, if it's not already playing
@@ -321,11 +331,6 @@ void StreamPacketsProc(void                             *inClientData,
         // Set
         isPaused = NO;
         
-        // Notify
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDSYRTMPPlayerNotificationDidStartPlayback
-                                                                object:self];
-        });
     }
 }
 
@@ -350,38 +355,48 @@ void StreamPacketsProc(void                             *inClientData,
 
 -(BOOL)_hasFinished
 {
-    return [self progress] >= 1.0;
+    return player.state == VLCMediaPlayerStateEnded;
+//    return [self progress] >= 1.0;
 }
 
 -(float)progress
 {
-    float currentTime = (float)[DSYRTMPPlayer sharedPlayer].timeIntervel;
-    float duration    = (float)[DSYRTMPPlayer sharedPlayer].duration;
-    if( duration > 0 )
-    {
-        return currentTime / duration;
-    }
-    else
-    {
-        return 0.0f;
-    }
+    return player.position;
+    
+    //TODO: Take this out
+//    float currentTime = (float)[DSYRTMPPlayer sharedPlayer].timeIntervel;
+//    float duration    = (float)[DSYRTMPPlayer sharedPlayer].duration;
+//    if( duration > 0 )
+//    {
+//        return currentTime / duration;
+//    }
+//    else
+//    {
+//        return 0.0f;
+//    }
 }
 
 -(int)timeIntervel
 {
-    int timeInterval = 0;
-    AudioQueueTimelineRef timeLine;
-    OSStatus status = AudioQueueCreateTimeline(audioQueue, &timeLine);
-    if(status == noErr) {
-        AudioTimeStamp timeStamp;
-        AudioQueueGetCurrentTime(audioQueue, timeLine, &timeStamp, NULL);
-        timeInterval = timeStamp.mSampleTime / audioStreamBasicDescription.mSampleRate; // modified
-    }
-    return timeInterval;
+    
+    return player.time.intValue;
+    
+    //TODO: Take this out
+//    int timeInterval = 0;
+//    AudioQueueTimelineRef timeLine;
+//    OSStatus status = AudioQueueCreateTimeline(audioQueue, &timeLine);
+//    if(status == noErr) {
+//        AudioTimeStamp timeStamp;
+//        AudioQueueGetCurrentTime(audioQueue, timeLine, &timeStamp, NULL);
+//        timeInterval = timeStamp.mSampleTime / audioStreamBasicDescription.mSampleRate; // modified
+//    }
+//    return timeInterval;
 }
 
 -(BOOL)isPlaying
 {
+    return player.isPlaying;
+    
     BOOL isPlaying = NO;
     if( audioQueue )
     {

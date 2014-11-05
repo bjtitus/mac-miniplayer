@@ -10,8 +10,12 @@
 
 #import "DSYAPIClient.h"
 
-@interface DSYAppDelegate () <DSYPlaylistViewControllerDelegate,DSYNavigationButtonsViewControllerDelegate,DSYSearchViewControllerDelegate>
+#import "SPMediaKeyTap.h"
 
+@interface DSYAppDelegate () <DSYPlaylistViewControllerDelegate,DSYNavigationButtonsViewControllerDelegate,DSYSearchViewControllerDelegate>
+{
+    SPMediaKeyTap *keyTap;
+}
 @end
 
 @implementation DSYAppDelegate
@@ -120,6 +124,9 @@
             // Register notifications
             [self _registerNotifications];
             
+            // Initialize our key watching stuff
+            [self _initializeKeyWatchers];
+            
         });
         
     } failed:^(NSError *error, id response) {
@@ -168,11 +175,21 @@
     // Full Screen View Controller
     self.fullScreenViewController = [DSYFullScreenViewController viewControllerWithXib];
     [self.fullScreenViewController.view setHidden:YES];
-    [self.window.contentView addSubviewFromViewController:self.fullScreenViewController];
     
     // Change selection to playlist
     [self.navigationButtonsViewController changedSelectionToPlaylist:self];
     
+}
+
+#pragma mark - Initialize Key Watchers
+-(void)_initializeKeyWatchers {
+    keyTap = [[SPMediaKeyTap alloc] initWithDelegate:self];
+    if([SPMediaKeyTap usesGlobalMediaKeyTap]) {
+        [keyTap startWatchingMediaKeys];
+    }
+    else {
+        NSLog(@"Media key monitoring disabled");
+    }
 }
 
 #pragma mark - Register Notifications
@@ -214,6 +231,8 @@
 #pragma mark - Full Screen Notifications
 -(void)windowWillBecomeFullScreen:(NSNotification *)notification
 {
+    [self.window.contentView addSubviewFromViewController:self.fullScreenViewController];
+    NSLog(@"Frame: %@", NSStringFromRect([(NSView *)self.window.contentView frame]));
     self.fullScreenMenuItemTitle = @"Exit Full Screen";
     [self.window setMaxSize:NSMakeSize(4000, 4000)];
     [self.nonFullScreenView setHidden:YES];
@@ -226,6 +245,7 @@
     [self.window setMaxSize:NSMakeSize(450, 4000)];
     [self.nonFullScreenView setHidden:NO];
     [self.fullScreenViewController.view setHidden:YES];
+    [self.fullScreenViewController.view removeFromSuperview];
 }
 
 #pragma mark - DSYViewDelegate
@@ -310,6 +330,44 @@
     // Load in search
     self.currentViewController = self.searchViewController;
     [self.contentView addSubviewFromViewController:self.currentViewController];
+}
+
+#pragma mark - Media Key Handling {
+-(void)mediaKeyTap:(SPMediaKeyTap*)keyTap receivedMediaKeyEvent:(NSEvent*)event;
+{
+    NSAssert([event type] == NSSystemDefined && [event subtype] == SPSystemDefinedEventMediaKeys, @"Unexpected NSEvent in mediaKeyTap:receivedMediaKeyEvent:");
+    // here be dragons...
+    int keyCode = (([event data1] & 0xFFFF0000) >> 16);
+    int keyFlags = ([event data1] & 0x0000FFFF);
+    BOOL keyIsPressed = (((keyFlags & 0xFF00) >> 8)) == 0xA;
+    int keyRepeat = (keyFlags & 0x1);
+    
+    if (keyIsPressed) {
+        DSYTrack *nextTrack = [[DSYRTMPPlayerQueue sharedQueue] nextTrack];
+        DSYTrack *previousTrack = [[DSYRTMPPlayerQueue sharedQueue] previousTrack];
+        
+        NSString *debugString = [NSString stringWithFormat:@"%@", keyRepeat?@", repeated.":@"."];
+        switch (keyCode) {
+            case NX_KEYTYPE_PLAY:
+                if ([DSYRTMPPlayer sharedPlayer].isPlaying) {
+                    [[DSYRTMPPlayer sharedPlayer] pause];
+                } else {
+                    [[DSYRTMPPlayer sharedPlayer] resume];
+                }
+                break;
+            case NX_KEYTYPE_FAST:
+                [[DSYRTMPPlayer sharedPlayer] playTrack:nextTrack];
+                break;
+                
+            case NX_KEYTYPE_REWIND:
+                [[DSYRTMPPlayer sharedPlayer] playTrack:previousTrack];
+                break;
+            default:
+                debugString = [NSString stringWithFormat:@"Key %d pressed%@", keyCode, debugString];
+                break;
+                // More cases defined in hidsystem/ev_keymap.h
+        }
+    }
 }
 
 #pragma mark - Cleanup

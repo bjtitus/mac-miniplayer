@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <VLCKit/VLCKit.h>
 @class DSYTrack;
 
 #import "DSYRTMPPlayerQueue.h"
@@ -16,7 +17,7 @@
 /**
  The DSYRTMPPlayer, a subclass of NSObject, provides an audio player implementation that can be extended to actually support RTMP playback. Due to current legal restrictions we cannot provide a native RTMP streamer implementation, but encourage developers to offer open source RTMP solutions to provide playback given the resource and location of an RTMP server's stream. Playback in this example would be performed using the Audio Queue Services to progressively load in the streamed data in a circular buffer type of fashion.
  */
-@interface DSYRTMPPlayer : NSObject
+@interface DSYRTMPPlayer : NSObject <VLCMediaPlayerDelegate>
 
 #pragma mark - Shared Instance
 ///-----------------------------------------------------------
