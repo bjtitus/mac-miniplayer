@@ -3,10 +3,10 @@
 <plist version="1.0">
 <dict>
 	<key>REDIRECT_URI</key>
-	<string>http://google.com</string>
+	<string></string>
 	<key>CLIENT_ID</key>
-	<string>ft3z5hkzuhfpwbabc23gueru</string>
+	<string></string>
 	<key>CLIENT_SECRET</key>
-	<string>2cHvywSuuDGx2RnS7CEKknPH</string>
+	<string></string>
 </dict>
 </plist>
