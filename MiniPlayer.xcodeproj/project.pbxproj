@@ -193,6 +193,7 @@
 		F51EAA601A0AD79100A77CC8 /* NSObject+SPInvocationGrabbing.m in Sources */ = {isa = PBXBuildFile; fileRef = F51EAA591A0AD79100A77CC8 /* NSObject+SPInvocationGrabbing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F51EAA611A0AD79100A77CC8 /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = F51EAA5B1A0AD79100A77CC8 /* SPMediaKeyTap.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F51EAA661A0AE7FE00A77CC8 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51EAA651A0AE7FE00A77CC8 /* Carbon.framework */; };
+		F51EAA6D1A0AF42F00A77CC8 /* DSYWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F51EAA6C1A0AF42F00A77CC8 /* DSYWebView.m */; };
 		F54DDEC41A0281B8004D996D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31737DB018C5B9050043F02E /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
@@ -392,6 +393,8 @@
 		F51EAA5B1A0AD79100A77CC8 /* SPMediaKeyTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMediaKeyTap.m; sourceTree = "<group>"; };
 		F51EAA631A0AE7BD00A77CC8 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		F51EAA651A0AE7FE00A77CC8 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
+		F51EAA6B1A0AF42F00A77CC8 /* DSYWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSYWebView.h; sourceTree = "<group>"; };
+		F51EAA6C1A0AF42F00A77CC8 /* DSYWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSYWebView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -756,6 +759,7 @@
 				31C18C8C18C454E8000E29E8 /* TextField */,
 				31FD231318C3BF37004DC4D9 /* Button */,
 				31FD230E18C2EBF8004DC4D9 /* View */,
+				F51EAA6E1A0AF43500A77CC8 /* WebView */,
 			);
 			name = "User Interface";
 			sourceTree = "<group>";
@@ -1100,6 +1104,15 @@
 			path = SPInvocationGrabbing;
 			sourceTree = "<group>";
 		};
+		F51EAA6E1A0AF43500A77CC8 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				F51EAA6B1A0AF42F00A77CC8 /* DSYWebView.h */,
+				F51EAA6C1A0AF42F00A77CC8 /* DSYWebView.m */,
+			);
+			name = WebView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1330,6 +1343,7 @@
 				31C18BBE18C3D40F000E29E8 /* DSYAddButton.m in Sources */,
 				31FD129D18C7B7FA00A33353 /* DSYGroupCellView.m in Sources */,
 				31FD125318C71FC000A33353 /* DSYPlaylistViewController.m in Sources */,
+				F51EAA6D1A0AF42F00A77CC8 /* DSYWebView.m in Sources */,
 				31FD231118C2EC0A004DC4D9 /* DSYView.m in Sources */,
 				31FD12AF18C7D44700A33353 /* ZKTextField.m in Sources */,
 				31C18C9B18C4550A000E29E8 /* DSYTextFieldBol.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <WebKit/WebKit.h>
+#import "DSYWebView.h"
 @class DSYSignInWindowController;
 
 /**
@@ -62,6 +62,6 @@
 /**
  The WebView that is being used to navigate the oAuth flow.
  */
-@property (nonatomic,weak) IBOutlet WebView *webView;
+@property (nonatomic,weak) IBOutlet DSYWebView *webView;
 
 @end
