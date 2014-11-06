@@ -63,6 +63,9 @@ To install Cocoapods, first make sure you have Ruby installed on your machine (o
 Once Cocoapods is installed you can install the required third party frameworks by running the following commands within the project's directory:<br>
 ```pod install```
 
+## Configuring The Project
+You will need to put your own API Key and Secret into the Keys.plist file. You can request an API key from [developer.beatsmusic.com](https://developer.beatsmusic.com). The API Key is the Client ID and the Secret is the Client Secret.
+
 ## Documentation
 Documentation is provided for the project using appledoc.  The project contains a `Generate Documentation` target that will install the docset into Xcode.
 
