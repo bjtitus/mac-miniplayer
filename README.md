@@ -1,7 +1,7 @@
-# Beats Music MiniPlayer
+# Music MiniPlayer for Beats Music™
 
 ## About
-The Beats Music MiniPlayer is an example application demonstrating how developers can utilitze the new Beats Music API to perform various tasks. These tasks include sign in, search, fetching images, performing API requests using AFNetworking, and caching results into a Core Data store with MagicalRecord.
+The Music MiniPlayer for Beats Music™ is an example application demonstrating how developers can utilitze the new Beats Music API to perform various tasks. These tasks include sign in, search, fetching images, performing API requests using AFNetworking, and caching results into a Core Data store with MagicalRecord.
 
 ## Features
 
