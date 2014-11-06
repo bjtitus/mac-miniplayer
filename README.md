@@ -1,4 +1,5 @@
 # Music MiniPlayer for Beats Music™
+[![Build Status](https://travis-ci.org/bjtitus/mac-miniplayer.svg?branch=master)](https://travis-ci.org/bjtitus/mac-miniplayer)
 
 ## About
 The Music MiniPlayer for Beats Music™ is an example application demonstrating how developers can utilitze the new Beats Music API to perform various tasks. These tasks include sign in, search, fetching images, performing API requests using AFNetworking, and caching results into a Core Data store with MagicalRecord.
