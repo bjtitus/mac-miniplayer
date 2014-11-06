@@ -1,1 +1,3 @@
 language: objective-c
+xcode_workspace: MiniPlayer.xcworkspace
+xcode_scheme: MiniPlayer
