@@ -182,11 +182,11 @@
 		31FDB47C18C26C47003B0A2D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31FDB45B18C26C47003B0A2D /* Cocoa.framework */; };
 		31FDB48418C26C47003B0A2D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 31FDB48218C26C47003B0A2D /* InfoPlist.strings */; };
 		31FDB48618C26C47003B0A2D /* MiniPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 31FDB48518C26C47003B0A2D /* MiniPlayerTests.m */; };
+		7EA63418AD002D57BF4E8881 /* libPods-MiniPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF5676F9AA2599B5E26082F /* libPods-MiniPlayer.a */; };
 		8C63126E936899F80847B8B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C72F43C6A45B56EA17EB91EB /* libPods.a */; };
 		F51EA9871A0995DC00A77CC8 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51EA9861A0995DC00A77CC8 /* AVFoundation.framework */; };
 		F51EAA4A1A09A05500A77CC8 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F51EAA491A09A05500A77CC8 /* libz.dylib */; };
 		F51EAA4C1A09A08F00A77CC8 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F51EAA4B1A09A08F00A77CC8 /* libiconv.dylib */; };
-		F51EAA4E1A0AA02A00A77CC8 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51EAA4D1A0AA02A00A77CC8 /* VLCKit.framework */; };
 		F51EAA4F1A0AA10500A77CC8 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51EAA4D1A0AA02A00A77CC8 /* VLCKit.framework */; };
 		F51EAA501A0AA1C100A77CC8 /* VLCKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51EAA4D1A0AA02A00A77CC8 /* VLCKit.framework */; };
 		F51EAA511A0AA1C100A77CC8 /* VLCKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F51EAA4D1A0AA02A00A77CC8 /* VLCKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -379,8 +379,11 @@
 		31FDB48518C26C47003B0A2D /* MiniPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiniPlayerTests.m; sourceTree = "<group>"; };
 		596BACC4FE7B1630642B7EDE /* libPods-MiniPlayerTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniPlayerTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A5D30392711876C76E0D94F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		5BF98065FD9C609AD08B28EE /* Pods-MiniPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPlayer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiniPlayer/Pods-MiniPlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		6156FE924954FE4D411682DA /* Pods-MiniPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPlayer.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniPlayer/Pods-MiniPlayer.release.xcconfig"; sourceTree = "<group>"; };
 		67D20877E847FA4B71142B51 /* Pods-MiniPlayerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPlayerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MiniPlayerTests/Pods-MiniPlayerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		86C4E6F35BD5CFB0E646AD1C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		BDF5676F9AA2599B5E26082F /* libPods-MiniPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MiniPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C72F43C6A45B56EA17EB91EB /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4685A11437993B249017638 /* Pods-MiniPlayerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MiniPlayerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MiniPlayerTests/Pods-MiniPlayerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F51EA9861A0995DC00A77CC8 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -405,13 +408,13 @@
 				F51EAA661A0AE7FE00A77CC8 /* Carbon.framework in Frameworks */,
 				F51EAA501A0AA1C100A77CC8 /* VLCKit.framework in Frameworks */,
 				F51EAA4C1A09A08F00A77CC8 /* libiconv.dylib in Frameworks */,
-				F51EAA4E1A0AA02A00A77CC8 /* VLCKit.framework in Frameworks */,
 				F51EAA4A1A09A05500A77CC8 /* libz.dylib in Frameworks */,
 				F51EA9871A0995DC00A77CC8 /* AVFoundation.framework in Frameworks */,
 				31FD123718C6FDB900A33353 /* WebKit.framework in Frameworks */,
 				31737DB118C5B9050043F02E /* AudioToolbox.framework in Frameworks */,
 				31FDB45C18C26C47003B0A2D /* Cocoa.framework in Frameworks */,
 				8C63126E936899F80847B8B5 /* libPods.a in Frameworks */,
+				7EA63418AD002D57BF4E8881 /* libPods-MiniPlayer.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1009,6 +1012,7 @@
 				31FDB45D18C26C47003B0A2D /* Other Frameworks */,
 				C72F43C6A45B56EA17EB91EB /* libPods.a */,
 				596BACC4FE7B1630642B7EDE /* libPods-MiniPlayerTests.a */,
+				BDF5676F9AA2599B5E26082F /* libPods-MiniPlayer.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1081,6 +1085,8 @@
 				86C4E6F35BD5CFB0E646AD1C /* Pods.release.xcconfig */,
 				67D20877E847FA4B71142B51 /* Pods-MiniPlayerTests.debug.xcconfig */,
 				D4685A11437993B249017638 /* Pods-MiniPlayerTests.release.xcconfig */,
+				5BF98065FD9C609AD08B28EE /* Pods-MiniPlayer.debug.xcconfig */,
+				6156FE924954FE4D411682DA /* Pods-MiniPlayer.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1163,7 +1169,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DSY;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Beats Music";
 				TargetAttributes = {
 					31FDB47818C26C47003B0A2D = {
@@ -1247,7 +1253,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniPlayer/Pods-MiniPlayer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		315D9B3818CA47C1003E06A3 /* ShellScript */ = {
@@ -1612,7 +1618,7 @@
 		};
 		31FDB48A18C26C47003B0A2D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5A5D30392711876C76E0D94F /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 5BF98065FD9C609AD08B28EE /* Pods-MiniPlayer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1660,7 +1666,7 @@
 		};
 		31FDB48B18C26C47003B0A2D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 86C4E6F35BD5CFB0E646AD1C /* Pods.release.xcconfig */;
+			baseConfigurationReference = 6156FE924954FE4D411682DA /* Pods-MiniPlayer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;

@@ -8,4 +8,6 @@ target :'MiniPlayer' do
 end
 
 target :'MiniPlayerTests' do
+	pod 'AFNetworking',   '~> 2.2'
+	pod 'MagicalRecord',  '~> 2.2'
 end
