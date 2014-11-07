@@ -1626,7 +1626,7 @@
 				INFOPLIST_FILE = "MiniPlayer/MiniPlayer-Info.plist";
 				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/MiniPlayer/RTSPPlayer/FFMpegiOS/lib";
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
@@ -1674,7 +1674,7 @@
 				INFOPLIST_FILE = "MiniPlayer/MiniPlayer-Info.plist";
 				INSTALL_PATH = "";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/MiniPlayer/RTSPPlayer/FFMpegiOS/lib";
+				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-framework",
