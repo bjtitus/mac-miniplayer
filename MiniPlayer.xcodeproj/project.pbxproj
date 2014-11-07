@@ -32,6 +32,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0AB44EDF5AF03E782D671332 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C72F43C6A45B56EA17EB91EB /* libPods.a */; };
 		0E10FF8933CD9F032AFFA012 /* libPods-MiniPlayerTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 596BACC4FE7B1630642B7EDE /* libPods-MiniPlayerTests.a */; };
 		31737DB118C5B9050043F02E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31737DB018C5B9050043F02E /* AudioToolbox.framework */; };
 		3197436818C9A3F700F5E90A /* DSYLargeImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3197436718C9A3F700F5E90A /* DSYLargeImageView.m */; };
@@ -427,6 +428,7 @@
 				F51EAA4F1A0AA10500A77CC8 /* VLCKit.framework in Frameworks */,
 				31FDB47B18C26C47003B0A2D /* XCTest.framework in Frameworks */,
 				0E10FF8933CD9F032AFFA012 /* libPods-MiniPlayerTests.a in Frameworks */,
+				0AB44EDF5AF03E782D671332 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1253,7 +1255,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniPlayer/Pods-MiniPlayer-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		315D9B3818CA47C1003E06A3 /* ShellScript */ = {
@@ -1294,7 +1296,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MiniPlayerTests/Pods-MiniPlayerTests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A5592E722684F913B01E41AC /* Check Pods Manifest.lock */ = {
@@ -1618,7 +1620,7 @@
 		};
 		31FDB48A18C26C47003B0A2D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5BF98065FD9C609AD08B28EE /* Pods-MiniPlayer.debug.xcconfig */;
+			baseConfigurationReference = 5A5D30392711876C76E0D94F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1666,7 +1668,7 @@
 		};
 		31FDB48B18C26C47003B0A2D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6156FE924954FE4D411682DA /* Pods-MiniPlayer.release.xcconfig */;
+			baseConfigurationReference = 86C4E6F35BD5CFB0E646AD1C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1714,7 +1716,7 @@
 		};
 		31FDB48D18C26C47003B0A2D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 67D20877E847FA4B71142B51 /* Pods-MiniPlayerTests.debug.xcconfig */;
+			baseConfigurationReference = 5A5D30392711876C76E0D94F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MiniPlayer.app/Contents/MacOS/MiniPlayer";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1742,7 +1744,7 @@
 		};
 		31FDB48E18C26C47003B0A2D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D4685A11437993B249017638 /* Pods-MiniPlayerTests.release.xcconfig */;
+			baseConfigurationReference = 86C4E6F35BD5CFB0E646AD1C /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MiniPlayer.app/Contents/MacOS/MiniPlayer";
 				COMBINE_HIDPI_IMAGES = YES;

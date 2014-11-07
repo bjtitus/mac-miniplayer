@@ -1,13 +1,8 @@
+source 'https://github.com/CocoaPods/Specs.git'
 platform :osx, '10.9'
 
 xcodeproj 'MiniPlayer'
+link_with 'MiniPlayer', 'MiniPlayerTests'
 
-target :'MiniPlayer' do
-	pod 'AFNetworking',   '~> 2.2'
-	pod 'MagicalRecord',  '~> 2.2'
-end
-
-target :'MiniPlayerTests' do
-	pod 'AFNetworking',   '~> 2.2'
-	pod 'MagicalRecord',  '~> 2.2'
-end
+pod 'AFNetworking',   '~> 2.2'
+pod 'MagicalRecord',  '~> 2.2'
